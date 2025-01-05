@@ -5,9 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="Style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <main class="container"></main>
+    <main class="container">
+      <section class="section__nav">
+        <div class="heading__box">
+          <h1 class="section__heading">TODO</h1>
+          <ion-icon name="sunny" class="heading__icon"></ion-icon>
+        </div>
+        <div class="todo__form">
+          <button class="heading__btn"></button>
+          <input
+            name="todo__input"
+            class="todo__input"
+            aria-label="todo__input"
+            type="text"
+            placeholder="Create a new todo..."
+          />
+        </div>
+        <div class="stats__list--box">
+          <ul class="stats__list">
+            <li class="stat stat__items--left">0 items left</li>
+            <div class="stats__filter">
+              <li class="stat stat__filter--all selected__filter">ALL</li>
+              <li class="stat stat__filter--active">ACTIVE</li>
+              <li class="stat stat__filter--completed">COMPLETED</li>
+            </div>
+            <li class="stat stat__items--clear">Clear All</li>
+          </ul>
+        </div>
+      </section>
+    </main>
   </body>
   <script src="script.js"></script>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
 </html>
