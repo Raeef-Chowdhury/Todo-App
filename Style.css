@@ -63,7 +63,6 @@ body {
   background: #2d2e38;
   border: none;
   outline: none;
-  border-radius: 0px 0px 10px 10px;
   font-size: 2.4rem;
   color: #333;
   width: 35vw;
@@ -83,7 +82,6 @@ body {
   background: #2d2e38;
 }
 .stats__list--box {
-  margin-top: 2.4rem;
   background: #2d2e38;
   border: none;
   outline: none;
@@ -91,6 +89,7 @@ body {
   border-radius: 1.2rem;
   gap: 2.4rem;
   width: 35vw;
+  border-radius: 0px 0px 10px 10px;
 }
 .stats__list {
   display: flex;
@@ -110,4 +109,61 @@ body {
 }
 .selected__filter {
   color: #74b3ce;
+}
+.todo__list--box {
+  margin-top: 2.4rem;
+}
+.todo__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35vw;
+  padding: 1.2rem;
+  gap: 1.2rem;
+  border-top: 1px solid #000;
+  background: #2d2e38;
+}
+.todo__label--checked {
+  background: url("checkmark-outline.svg"),
+    linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  border-radius: 1000rem;
+  border: 1px solid white;
+  padding: 1.2rem;
+  font-size: 2.4rem;
+  background: #2d2e38;
+}
+.todo__label {
+  border-radius: 1000rem;
+  border: 1px solid white;
+  padding: 1.2rem;
+  font-size: 2.4rem;
+  background: #2d2e38;
+}
+.todo__checkbox {
+  display: none;
+}
+.todo__icon {
+  transform: translateX(100%);
+  font-size: 2.4rem;
+  color: #880808;
+  margin-left: 12rem;
+}
+.todo__item--form {
+  display: flex;
+  align-items: center;
+}
+.todo__checkbox {
+  transform: translateX(-100%);
+  border: 1px solid hsl(234, 11%, 52%);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.todo__text {
+  font-size: 2.4rem;
+}
+.todo__list {
+  border-bottom: 1px solid #000;
 }
