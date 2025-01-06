@@ -125,13 +125,16 @@ body {
   overflow: auto;
 }
 .todo__label--checked {
+  transition: all 1s;
   border-radius: 1000rem;
   border: 1px solid white;
   padding: 1.2rem;
   font-size: 2.4rem;
-  background: #2d2e38;
+  background: url(checkmark-outline.svg),
+    linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%)) !important;
 }
 .todo__label {
+  transition: all 1s;
   border-radius: 1000rem;
   border: 1px solid white;
   padding: 1.2rem;
@@ -156,6 +159,7 @@ body {
 }
 .todo__text {
   font-size: 2.4rem;
+  color: white;
 }
 .todo__list {
   border-bottom: 1px solid #000;
