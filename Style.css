@@ -116,16 +116,15 @@ body {
 .todo__item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 35vw;
+  justify-content: space-between;
+  width: 100%;
   padding: 1.2rem;
   gap: 1.2rem;
   border-top: 1px solid #000;
   background: #2d2e38;
+  overflow: auto;
 }
 .todo__label--checked {
-  background: url("checkmark-outline.svg"),
-    linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
   border-radius: 1000rem;
   border: 1px solid white;
   padding: 1.2rem;
@@ -143,17 +142,11 @@ body {
   display: none;
 }
 .todo__icon {
-  transform: translateX(100%);
   font-size: 2.4rem;
   color: #880808;
-  margin-left: 12rem;
-}
-.todo__item--form {
-  display: flex;
-  align-items: center;
+  font-size: 3.6rem;
 }
 .todo__checkbox {
-  transform: translateX(-100%);
   border: 1px solid hsl(234, 11%, 52%);
   height: 20px;
   width: 20px;
@@ -166,4 +159,10 @@ body {
 }
 .todo__list {
   border-bottom: 1px solid #000;
+  width: 35vw;
+}
+.todo__item--box {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
 }
