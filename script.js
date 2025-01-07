@@ -43,17 +43,14 @@ function lightModeEnable() {
   root.style.setProperty("--text-color", "#000");
   sectionNav.style.backgroundImage = "url('bg-desktop-light.jpg')";
 }
+// Add Task and update TOdos
 input.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     ///// Create Add Task Function
     addTodo();
-    // Store the todos in a array for deleting
-    const todoItems = document.querySelectorAll(".todo__item");
-    let todos = [...todoItems];
-    console.log(todos);
+
     //Call update count function to update the items left text
     updateCount();
-  } else {
   }
 });
 // Add Item Count function
@@ -81,18 +78,29 @@ function addTodo() {
   const todoLabels = todoItem.querySelectorAll(".todo__label");
   labelHover(todoLabels);
   // Update todos array
-  todos.push(todoItem);
+  // Add the item to the todos array
+  todos.push({ id: todoItem.id, element: todoItem });
   console.log(todos);
+  // Add delete one functionality
+  const deleteBtn = todoItem.querySelector(".todo__icon");
+  deleteBtn.addEventListener("click", () => {
+    deleteTodo(todoItem.id);
+  });
 }
 // Add Clear All Funtionaltiy
 todoDeleteAll.addEventListener("click", function () {
   const todoItemCount = document.querySelectorAll(".todo__item").length;
-  const confirmation = confirm(
-    `Are you sure you want to delete ${todoItemCount} items?`
-  );
-  if (confirmation == true) {
-    todoList.innerHTML = "";
-    updateCount();
+  if (todoItemCount == 0) {
+    alert("Please an add item first before using this button");
+  } else {
+    const confirmation = confirm(
+      `Are you sure you want to delete ${todoItemCount} items?`
+    );
+    if (confirmation == true) {
+      todoList.innerHTML = "";
+      updateCount();
+      todos = [];
+    }
   }
 });
 
@@ -113,4 +121,12 @@ function labelHover(labelClass) {
     });
   });
 }
-// Add Dark mode and light mode switch
+// Delete task functionality
+function deleteTodo(todoItemId) {
+  const todoItem = document.getElementById(todoItemId);
+  if (todoItem) {
+    todoItem.remove(); // Remove from DOM
+    todos = todos.filter((todo) => todo.id !== todoItemId); // Remove from the todos array
+    updateCount(); // Update item count after deletion
+  }
+}
