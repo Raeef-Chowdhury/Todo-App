@@ -6,7 +6,9 @@ const toggleMode = document.querySelectorAll(".heading__icon");
 const darkMode = document.querySelector(".heading__icon--dark");
 const lightMode = document.querySelector(".heading__icon--bright");
 const sectionNav = document.querySelector(".section__nav");
+const filterActive = document.querySelector(".stat__filter--active");
 let todos = [];
+// Filtering Active items
 
 // Implement dark mode
 toggleMode.forEach((btn) =>
@@ -77,6 +79,8 @@ function addTodo() {
   // Add Hover funciotnality
   const todoLabels = todoItem.querySelectorAll(".todo__label");
   labelHover(todoLabels);
+  // Add active filter
+  filterActive.addEventListener("click", () => filterCheckboxed());
   // Update todos array
   // Add the item to the todos array
   todos.push({ id: todoItem.id, element: todoItem });
@@ -126,7 +130,23 @@ function deleteTodo(todoItemId) {
   const todoItem = document.getElementById(todoItemId);
   if (todoItem) {
     todoItem.remove(); // Remove from DOM
-    todos = todos.filter((todo) => todo.id !== todoItemId); // Remove from the todos array
+    todos.filter((todo) => todo.id !== todoItemId); // Remove from the todos array
     updateCount(); // Update item count after deletion
   }
+}
+// Filtering out the checkboxed ones
+function filterCheckboxed() {
+  todos.forEach((todo) => {
+    const todoLabel =
+      todo.element.querySelector(".todo__label") ||
+      todo.element.querySelector(".todo__label--checked");
+    console.log(todoLabel);
+
+    // Check if the label has the 'todo__label--checked' class
+    if (todoLabel.classList.contains("todo__label--checked")) {
+      todo.element.remove(); // Remove from DOM
+      updateCount();
+      console.log(todos);
+    }
+  });
 }
