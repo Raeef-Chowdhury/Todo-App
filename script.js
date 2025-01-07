@@ -6,7 +6,9 @@ const toggleMode = document.querySelectorAll(".heading__icon");
 const darkMode = document.querySelector(".heading__icon--dark");
 const lightMode = document.querySelector(".heading__icon--bright");
 const sectionNav = document.querySelector(".section__nav");
-const filterActive = document.querySelector(".stat__filter--active");
+const filterActiveBtn = document.querySelector(".stat__filter--active");
+const filterCompleteBtn = document.querySelector(".stat__filter--completed");
+const filterAll = document.querySelector(".stat__filter--all");
 let todos = [];
 // Filtering Active items
 
@@ -80,7 +82,11 @@ function addTodo() {
   const todoLabels = todoItem.querySelectorAll(".todo__label");
   labelHover(todoLabels);
   // Add active filter
-  filterActive.addEventListener("click", () => filterCheckboxed());
+  filterActiveBtn.addEventListener("click", () => filterActive());
+  // Add Completed Filter
+  filterCompleteBtn.addEventListener("click", () => filterCompleted());
+  // Add All filter
+  filterAll.addEventListener("click", () => filterAllTasks());
   // Update todos array
   // Add the item to the todos array
   todos.push({ id: todoItem.id, element: todoItem });
@@ -114,13 +120,18 @@ function labelHover(labelClass) {
   labelClass.forEach((label) => {
     label.addEventListener("click", function () {
       // Toggle the "todo__label--checked" class directly
+      const todoItem = label.parentNode;
+      const text = todoItem.querySelector(".todo__text");
+      console.log(todoItem);
 
       if (label.classList.contains("todo__label--checked")) {
         label.classList.remove("todo__label--checked");
         label.classList.add("todo__label");
+        text.classList.remove("strikethrough");
       } else {
         label.classList.add("todo__label--checked");
         label.classList.remove("todo__label");
+        text.classList.add("strikethrough");
       }
     });
   });
@@ -132,21 +143,56 @@ function deleteTodo(todoItemId) {
     todoItem.remove(); // Remove from DOM
     todos.filter((todo) => todo.id !== todoItemId); // Remove from the todos array
     updateCount(); // Update item count after deletion
+    todos = todos.filter((todo) => todo.id !== todoItemId);
   }
 }
 // Filtering out the checkboxed ones
-function filterCheckboxed() {
+function filterActive() {
+  filterActiveBtn.classList.add("selected__filter");
+  filterCompleteBtn.classList.remove("selected__filter");
+  filterAll.classList.remove("selected__filter");
   todos.forEach((todo) => {
     const todoLabel =
       todo.element.querySelector(".todo__label") ||
       todo.element.querySelector(".todo__label--checked");
-    console.log(todoLabel);
 
     // Check if the label has the 'todo__label--checked' class
     if (todoLabel.classList.contains("todo__label--checked")) {
       todo.element.remove(); // Remove from DOM
       updateCount();
-      console.log(todos);
     }
   });
+}
+function filterCompleted() {
+  filterCompleteBtn.classList.add("selected__filter");
+  filterActiveBtn.classList.remove("selected__filter");
+  filterAll.classList.remove("selected__filter");
+  todos.forEach((todo) => {
+    const todoLabel =
+      todo.element.querySelector(".todo__label") ||
+      todo.element.querySelector(".todo__label--checked");
+
+    // Check if the label has the 'todo__label--checked' class
+    if (!todoLabel.classList.contains("todo__label--checked")) {
+      todo.element.remove(); // Remove from DOM
+      updateCount();
+    }
+  });
+}
+
+function filterAllTasks() {
+  // Highlight the "All" filter button and reset other filters
+  filterAll.classList.add("selected__filter");
+  filterActiveBtn.classList.remove("selected__filter");
+  filterCompleteBtn.classList.remove("selected__filter");
+
+  // Loop through the todos array and ensure all tasks are displayed
+  todos.forEach((todo) => {
+    if (!document.body.contains(todo.element)) {
+      todoList.appendChild(todo.element); // Re-add missing items to the DOM
+    }
+  });
+
+  // Update the count to reflect all tasks
+  updateCount();
 }
